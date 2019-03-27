@@ -21,7 +21,7 @@ If having problems in linux try using `make build-linux`
 Usage
 -----
 ```
-./mytodo-microservice -port=9000
+./mytodo-microservice
 ```
 By default the program launches at `localhost:9000`.
 
@@ -30,14 +30,14 @@ Routes
 
 GET - List tasks
 ----------------
-The route used is /tasks
+The route used is `/tasks`
 ```
 curl http://localhost:9000/tasks
 ```
 
 POST - Add task
 ---------------
-The route used is /tasks
+The route used is `/tasks`
 ```
 curl -X POST -H "Content-Type: application/json" --data '{"title": "a title", "desc": "a desc", "date": "01/12/19"}' http://localhost:9000/tasks
 
@@ -45,7 +45,7 @@ curl -X POST -H "Content-Type: application/json" --data '{"title": "a title", "d
 
 DELETE - Delete task
 --------------------
-The route used is /tasks
+The route used is `/tasks`
 ```
 curl -X DELETE -H "Content-Type: text/plain" --data '"TASKID"' http://localhost:9000/tasks
 
@@ -53,14 +53,14 @@ curl -X DELETE -H "Content-Type: text/plain" --data '"TASKID"' http://localhost:
 
 PUT - Marked as done
 --------------------
-The route used is /tasks
+The route used is `/tasks`
 ```
 curl -X PUT -H "Content-Type: text/plain" --data '"TASKID"' http://localhost:9000/tasks
 ```
 
 GET - Get a task info
 ---------------------
-The route used is /tasks/{id}
+The route used is `/tasks/{id}`
 ```
 curl http://localhost:9000/tasks/TASKID
 ```
