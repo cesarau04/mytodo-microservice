@@ -20,7 +20,7 @@ If having problems in linux try using `make build-linux`
 
 Usage
 -----
-By default the program launches at `localhost:9000`, Ex. if your run `make run`
+By default the program launches at `localhost:9000`, if you run the executable you can select the port to use.
 ```
 ./mytodo-microservice -port=9000
 ```
