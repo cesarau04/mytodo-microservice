@@ -65,3 +65,6 @@ The route used is `/tasks/{id}`
 curl http://localhost:9000/tasks/TASKID
 ```
 
+TODO
+====
+- Create a route for modify the elements of a given task
