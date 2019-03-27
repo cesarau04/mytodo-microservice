@@ -1,5 +1,6 @@
 # Makefile taken from https://sohlich.github.io/post/go_makefile/
 # Basic go commands
+# Makefile tested for linux. Don't work for Windows
 
 GOCMD=go
 GOBUILD=$(GOCMD) build
