@@ -21,7 +21,7 @@ If having problems in linux try using `make build-linux`
 Usage
 -----
 ```
-./mytodo-microservice
+./mytodo-microservice -port=9000
 ```
 By default the program launches at `localhost:9000`.
 
