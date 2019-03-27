@@ -1,8 +1,10 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -15,6 +17,12 @@ type Task struct {
 }
 
 func main() {
+	userPort := flag.Int("port", 9000, "port to use")
+	flag.Parse()
+	if *userPort < 1024 || *userPort > 65535 {
+		log.Fatal("Port musb be > 1023 and < 65535")
+	}
+	log.Printf("PORT==> %d", *userPort)
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/tasks", getAllTasks).Methods("GET")
 	router.HandleFunc("/tasks", newTask).Methods("POST")
@@ -22,7 +30,7 @@ func main() {
 	router.HandleFunc("/tasks", markAsDone).Methods("PUT")
 	router.HandleFunc("/tasks/{id}", getIDTask).Methods("GET")
 
-	if err := http.ListenAndServe(":9000", router); err != nil {
+	if err := http.ListenAndServe(":"+strconv.Itoa(*userPort), router); err != nil {
 		log.Fatal(err)
 	}
 }
