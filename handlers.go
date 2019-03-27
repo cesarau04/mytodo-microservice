@@ -62,8 +62,9 @@ func newTask(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal("error while setting value", err)
 	}
-	fmt.Fprintf(w, "Successfully added with key: %s", newRef.Key)
+	fmt.Fprintf(w, "Successfully added with key: %s\n", newRef.Key)
 }
+
 func deleteTask(w http.ResponseWriter, r *http.Request) {
 	var deleteID string
 
@@ -74,7 +75,11 @@ func deleteTask(w http.ResponseWriter, r *http.Request) {
 	if err := ref.Delete(ctx); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintf(w, "Deleted %s", deleteID)
+	ref = client.NewRef(donePathDB + deleteID)
+	if err := ref.Delete(ctx); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Fprintf(w, "Deleted %s\n", deleteID)
 }
 
 func markAsDone(w http.ResponseWriter, r *http.Request) {
@@ -95,7 +100,7 @@ func markAsDone(w http.ResponseWriter, r *http.Request) {
 	if err := ref.Set(ctx, &dataToMove); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintf(w, "Task %s, marked as done", updateID)
+	fmt.Fprintf(w, "Task %s, marked as done\n", updateID)
 }
 
 func getIDTask(w http.ResponseWriter, r *http.Request) {
