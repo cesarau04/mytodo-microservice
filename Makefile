@@ -1,17 +1,28 @@
-GOGET = GO GET
-GORUN = GO RUN
-GOBUILD = GO BUILD
-GOMAIN = main.go
-GOOTHERS = handlers.go
-TARGET = main
+# Makefile taken from https://sohlich.github.io/post/go_makefile/
+# Basic go commands
 
-all: $(TARGET)
-	$(GOGET)
-	$(GORUN) $(GOMAIN) $(GOOTHERS)
+GOCMD=go
+GOBUILD=$(GOCMD) build
+GOCLEAN=$(GOCMD) clean
+GOGET=$(GOCMD) get
 
-build: $(TARGET)
-	$(GOGET)
-	$(GOBUILD) $(GOMAIN) $(GOOTHERS)
-	
+# Binary names
+BINARY_NAME=mytodo-microservice
+BINARY_UNIX=$(BINARY_NAME)_unix
+
+build:
+	$(GOGET) -v
+	$(GOBUILD) -o $(BINARY_NAME) -v
+
+run:
+	$(GOGET) -v
+	$(GOBUILD) -o $(BINARY_NAME) -v ./...
+	./$(BINARY_NAME)
+
 clean:
-	rm -f $(TARGET)
+	$(GOCLEAN)
+	rm -f $(BINARY_NAME)
+	rm -f $(BINARY_UNIX)
+
+build-linux:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_UNIX) -v
